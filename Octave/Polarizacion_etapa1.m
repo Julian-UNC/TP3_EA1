@@ -5,7 +5,7 @@ Vt  = 2;         % Tensión de umbral [V]
 Vdd = 12;        % Tensión de alimentación [V]
 Rg1 = 2000000;   % 2 MΩ
 Rg2 = 1000000;   % 1 MΩ
-Rd  = 2200;      % 1.5 kΩ
+Rd  = 2200;      % 2.2 kΩ
 
 Vg1 = (Vdd * Rg2) / (Rg1 + Rg2);  % Vg1 = 4 V
 
@@ -54,7 +54,9 @@ for Vp = v_Vp
            (Vds1 >= (Vgs1 - Vt)) && (Vds2 >= (Vgs2 - Vt))
 
             % Tensión óptima ideal para Máxima Excursión Simétrica en Vds1
-            Vds1_opt = (Vdd - Ids*(Rd + Rs) - Vds2) / 2;
+            %Vds1_opt = (Vdd - Ids*(Rd + Rs) - Vds2) / 2;
+            %Vds1_opt = Vdd/2;
+            Vds1_opt = (Vdd-Vds2)/2;
 
             % Error respecto a la máxima excursión
             error_excursion = abs(Vds1 - Vds1_opt);
@@ -77,7 +79,7 @@ if !isempty(puntos_optimos)
     fprintf('Vp óptimo : %.3f V\n', puntos_optimos(1));
     fprintf('Rs óptimo : %.2f Ohm\n', puntos_optimos(2));
     fprintf('--------------------------------------------\n');
-    fprintf('Ids  : %.4f A \n', puntos_optimos(3)*1000);
+    fprintf('Ids  : %.4f mA \n', puntos_optimos(3)*1000);
     fprintf('Vgs1 : %.3f V\n', puntos_optimos(4));
     fprintf('Vgs2 : %.3f V\n', puntos_optimos(5));
     fprintf('Vds1 : %.3f V (Punto de operación)\n', puntos_optimos(6));
@@ -89,8 +91,8 @@ else
 endif
 
 % Valores óptimos encontrados para Máxima Excursión Simétrica
-Vp_opt = 6.5;   % [V]
-Rs_opt = 4250;  % [Ohm]
+Vp_opt = puntos_optimos(1);   % [V]
+Rs_opt = puntos_optimos(2);  % [Ohm]
 
 sistema = @(x) [
     x(1) - K * (x(2) - Vt)^2;         % Ids - K*(Vgs1-Vt)^2 = 0
@@ -127,21 +129,23 @@ fprintf('   Vp = %.2f V\n', Vp_opt);
 fprintf('   Rs = %.2f Ohm\n', Rs_opt);
 fprintf('------------------------------------------------------\n');
 fprintf(' TRANSISTOR 1 (M1):\n');
-fprintf('   Id1  = %.4f mA\n', Ids_q);
+fprintf('   Id1  = %.4f mA\n', Ids_q*1000);
 fprintf('   Vgs1 = %.3f V\n', Vgs1_q);
 fprintf('   Vds1 = %.3f V\n', Vds1_q);
-fprintf('   gm1 = %.3f V\n', gm1);
+fprintf('   gm1 = %.3f mS\n', gm1*1000);
 fprintf('------------------------------------------------------\n');
 fprintf(' TRANSISTOR 2 (M2):\n');
-fprintf('   Id2  = %.4f mA\n', Ids_q);
+fprintf('   Id2  = %.4f mA\n', Ids_q*1000);
 fprintf('   Vgs2 = %.3f V\n', Vgs2_q);
 fprintf('   Vds2 = %.3f V\n', Vds2_q);
-fprintf('   gm2 = %.3f V\n', gm2);
+fprintf('   gm2 = %.3f mS\n', gm2*1000);
 fprintf('======================================================\n\n');
 
 % Vector para graficar la parábola característica
 Vgs_vec = linspace(Vt, Vt + 2, 300);
 Ids_vec = K * (Vgs_vec - Vt) .^ 2;
+
+%%%   CURVAS CARACTERÍSTICAS DE LOS TRANSITORES
 
 % --- Gráfica Transistor 1 ---
 figure(1);
@@ -157,7 +161,7 @@ ylim([0, Ids_q * 2.5]);                % Rango Y desde 0 hasta un poco más del 
 
 grid on;
 xlabel('V_{gs1} [V]');
-ylabel('I_{ds} [mA]');
+ylabel('I_{ds} [A]');
 title(sprintf('Punto Q - Transistor 1 (V_{gs1}=%.3fV, Id=%.3fmA)', Vgs1_q, Ids_q));
 legend('Curva I_{ds}', 'Intersección V_{gs1}', 'Intersección Id', 'Location', 'northwest');
 hold off;
@@ -176,7 +180,57 @@ ylim([0, Ids_q * 2.5]);                % Rango Y adaptado a la corriente de repo
 
 grid on;
 xlabel('V_{gs2} [V]');
-ylabel('I_{ds} [mA]');
+ylabel('I_{ds} [A]');
 title(sprintf('Punto Q - Transistor 2 (V_{gs2}=%.3fV, Id=%.3fmA)', Vgs2_q, Ids_q));
 legend('Curva I_{ds}', 'Intersección V_{gs2}', 'Intersección Id', 'Location', 'northwest');
 hold off;
+
+%%%     RECTAS DE CARGA DE LOS TRANSISTORES
+
+Zin2 = 556.79;
+
+figure(3);
+
+Vds_1 = linspace(0, Vdd-Vds2_q, 100);
+Ids_1 = (Vdd-Vds2_q)/(Rd+Rs_opt) - Vds_1/(Rd+Rs_opt);
+Rca1  = Rs_opt + 1/(1/Zin2+1/Rd);
+ids_1 = Ids_q + (Vdd-Vds2_q) -Vds_1/Rca1;
+
+plot(Vds_1, Ids_1, 'm', 'LineWidth', 1.5);
+hold on;
+%plot(Vds_1, ids_1, 'm', 'LineWidth', 1.5);
+hold on;
+plot(Vds1_q, Ids_q, 'mo', 'markersize', 8, 'markerfacecolor', 'm');
+title('Recta de Carga CC - CA - M2 (Segunda Etapa)');
+xlabel('Vds [V]'); ylabel('Id [A]');
+grid on;
+hold off;
+
+figure(4);
+
+Vds_2 = linspace(0, Vdd-Vds1_q, 100);
+Ids_2 = (Vdd-Vds1_q)/(Rd+Rs_opt) - Vds_2/(Rd+Rs_opt);
+Rca2  = Rs_opt + 1/(1/Zin2+1/Rd);
+ids_2 = Ids_q + (Vdd-Vds1_q) -Vds_2/Rca1;
+
+plot(Vds_2, Ids_2, 'm', 'LineWidth', 1.5);
+hold on;
+%plot(Vds_1, ids_1, 'm', 'LineWidth', 1.5);
+hold on;
+plot(Vds2_q, Ids_q, 'mo', 'markersize', 8, 'markerfacecolor', 'm');
+title('Recta de Carga CC - CA - M2 (Segunda Etapa)');
+xlabel('Vds [V]'); ylabel('Id [A]');
+grid on;
+hold off;
+
+disp('-- IMPEDANCIAS --');
+rds = 7.5;
+mu1 = gm1*rds
+mu2 = gm2*rds
+
+Raux1 = rds+(rds+Rs_opt*(mu2+1))*(mu1+1);
+Zout = 1/(1/Rd+1/Raux1)
+
+Zin = Rg1
+
+
