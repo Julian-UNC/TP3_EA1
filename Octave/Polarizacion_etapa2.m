@@ -1,6 +1,6 @@
 clear all; close all; clc;
 
-K   = 0.015625;  % Constante del MOSFET [A/V^2]
+K   = 0.056;  % Constante del MOSFET [A/V^2]
 Vt  = 2;         % Tensión de umbral [V]
 Vdd = 12;        % Tensión de alimentación [V]
 Rg1 = 2000000;   % 2 MΩ
@@ -75,7 +75,7 @@ endfor
 % MOSTRAR RESULTADOS EN PANTALLA
 % =========================================================================
 if !isempty(puntos_optimos)
-    fprintf('\n=== RESULTADOS MÁXIMA EXCURSIÓN SIMÉTRICA ===\n');
+    fprintf('\n=== RESULTADOS MÁXIMA EXCURSIÓN SIMÉTRICA ETAPA 2 ===\n');
     fprintf('Vp óptimo : %.3f V\n', puntos_optimos(1));
     fprintf('Rs óptimo : %.2f Ohm\n', puntos_optimos(2));
     fprintf('--------------------------------------------\n');
@@ -190,11 +190,11 @@ figure(3);
 Vds_1 = linspace(0, Vdd-Vds2_q, 100);
 Ids_1 = (Vdd-Vds2_q)/(Rd+Rs_opt) - Vds_1/(Rd+Rs_opt);
 Rca1  = Rs_opt + 1/(1/Rl+1/Rd);
-ids_1 = Ids_q + (Vdd-Vds2_q) -Vds_1/Rca1;
+ids_1 = Ids_q + (Vds1_q-Vds_1)/Rca1;
 
 plot(Vds_1, Ids_1, 'm', 'LineWidth', 1.5);
 hold on;
-%plot(Vds_1, ids_1, 'm', 'LineWidth', 1.5);
+plot(Vds_1, ids_1, 'm', 'LineWidth', 1.5);
 hold on;
 plot(Vds1_q, Ids_q, 'mo', 'markersize', 8, 'markerfacecolor', 'm');
 title('Recta de Carga CC - CA - M2 (Segunda Etapa)');
@@ -207,11 +207,11 @@ figure(4);
 Vds_2 = linspace(0, Vdd-Vds1_q, 100);
 Ids_2 = (Vdd-Vds1_q)/(Rd+Rs_opt) - Vds_2/(Rd+Rs_opt);
 Rca2  = Rs_opt + 1/(1/Rl+1/Rd);
-ids_2 = Ids_q + (Vdd-Vds1_q) -Vds_2/Rca1;
+ids_2 = Ids_q + (Vds2_q-Vds_2)/Rca1;
 
 plot(Vds_2, Ids_2, 'm', 'LineWidth', 1.5);
 hold on;
-%plot(Vds_1, ids_1, 'm', 'LineWidth', 1.5);
+plot(Vds_2, ids_2, 'm', 'LineWidth', 1.5);
 hold on;
 plot(Vds2_q, Ids_q, 'mo', 'markersize', 8, 'markerfacecolor', 'm');
 title('Recta de Carga CC - CA - M2 (Segunda Etapa)');

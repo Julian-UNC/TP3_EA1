@@ -2,16 +2,19 @@ clear all; close all; clc
 
 Vi   = 1.0;      % Tensión de entrada de prueba [V]
 Rg1  = 666666.67;% 0.66 MΩ
-%rds  = 7.5;      % Encontrado ed datasheet
-rds = 50000;  %gemini está loco
+%rds  = 3.2      % Encontrado ed datasheet
+rds  = 7.5;    % gemini está loco
 Rd1  = 2200;     % 1.5 kΩ
-Rs2  = 4700;     % Resistencia de fuente Rs2 [Ω]
+Rs2  = 6500;     % Resistencia de fuente Rs2 [Ω]
 Rd2  = 1500;     % 1.5 kΩ
 Rl   = 1200;     % Resistencia de carga Rl [Ω]
 %mu1  = 0.036464;       % Factor de amplificación del MOSFET 1 (mu = gm * rds)
 %mu2  = 0.45912;       % Factor de amplificación del MOSFET 2
-mu1 = 0.080*rds;
-mu2 = 0.080*rds;
+gm1 = gm2 = 0.320; % tipico según DS
+%gm1 = 0.0138;   %calculados según la polarización
+%gm2 = 0.01007;
+mu1 = gm1*rds
+mu2 = gm2*rds
 
 
 %     ARMADO DE LA MATRIZ
@@ -39,7 +42,7 @@ G_Rd1 = 1 / Rd1;
 
 % Coeficientes para [V_N001, V_N003, V_N005, V_N007]
 A(2, 1) = G_rds * mu1;                                     % Derivado de V_N002
-A(2, 2) = G_rds + G_Rd1 + G_rds + G_rds*(1 + mu2);        % Términos en V_003
+A(2, 2) = G_rds + G_Rd1 + G_rds + G_rds*(1 + mu2);         % Términos en V_003
 A(2, 3) = -G_rds;                                          % Desde R6 (hacia N005)
 A(2, 4) = -G_rds;                                          % Desde R4 (hacia N006)
 B(2, 0+1) = 0;
