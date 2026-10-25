@@ -87,7 +87,7 @@ Cgd = Crss;
 Cds = Coss - Cgd;
 Cgs = Ciss - Cgd;
 
-Req = (rds2 * Rd2) / (rds2 + Rd2);
+Req = 1/(1/rds2+1/Rd2+1/Rl);
 wphf = 20e3;
 
 Ceq = 1/(Req * wphf);

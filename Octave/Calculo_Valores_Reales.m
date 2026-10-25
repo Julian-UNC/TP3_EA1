@@ -277,3 +277,54 @@ title('Rectas de Carga DC y AC - Etapa 2 (M2_1)');
 xlabel('Vds [V]'); ylabel('Ids [mA]');
 legend('Recta de Carga DC', 'Recta de Carga AC', 'Punto Q', 'Location', 'northeast');
 ylim([0 max(ids_dc_e2)*1.2*1000]); xlim([0 Vdd]);
+
+% =========================================================================
+% TABLA DE TENSIONES DE TERMINALES (Vg, Vd, Vs) E Ids
+% =========================================================================
+
+% --- 1. Transistor de Referencia (p-MOSFET: Mp) ---
+Vs_p  = 0;
+Vg_p  = Vp;
+Vd_p  = Vp;
+Ids_p = xp(1);
+
+% --- 2. Etapa 1 ---
+% Transistor Superior (utiliza x(2) para Vgs y x(4) para Vds)
+% Su Source está conectado al Drenador del transistor inferior
+Vs_1_sup = x1(5) + x1(1)*Rs1; % El Source del superior es el Vds del inferior
+Vg_1_sup = Vg1;
+Vd_1_sup = Vdd - x1(1) * Rd1;
+Ids_1_sup = x1(1);
+
+% Transistor Inferior (utiliza x(3) para Vgs y x(5) para Vds)
+% Su Source está conectado a Rs1
+Vs_1_inf = x1(1) * Rs1;
+Vg_1_inf = Vp;
+Vd_1_inf = Vs_1_sup;
+Ids_1_inf = x1(1);
+
+% --- 3. Etapa 2 ---
+% Transistor Superior (utiliza x(2) para Vgs y x(4) para Vds)
+Vs_2_sup = x2(5) + x2(1)*Rs2; % El Source del superior es el Vds del inferior
+Vg_2_sup = Vg2;
+Vd_2_sup = Vdd - x2(1) * Rd2;
+Ids_2_sup = x2(1);
+
+% Transistor Inferior (utiliza x(3) para Vgs y x(5) para Vds)
+% Su Source está conectado a Rs2
+Vs_2_inf = x2(1) * Rs2;
+Vg_2_inf = Vp;
+Vd_2_inf = Vs_2_sup;
+Ids_2_inf = x2(1);
+
+% --- IMPRESIÓN DE LA TABLA ---
+fprintf('\n================== TABLA DE TERMINALES DC (Vg, Vd, Vs, Ids) ==================\n');
+fprintf('%-28s | %-10s | %-10s | %-10s | %-12s\n', 'Transistor', 'Vg [V]', 'Vd [V]', 'Vs [V]', 'Ids [mA]');
+fprintf('------------------------------------------------------------------------------\n');
+fprintf('%-28s | %-10.4f | %-10.4f | %-10.4f | %-12.4f\n', 'Referencia (Mp)',          Vg_p,      Vd_p,      Vs_p,      Ids_p * 1000);
+fprintf('%-28s | %-10.4f | %-10.4f | %-10.4f | %-12.4f\n', 'Etapa 1 - Superior',      Vg_1_sup,  Vd_1_sup,  Vs_1_sup,  Ids_1_sup * 1000);
+fprintf('%-28s | %-10.4f | %-10.4f | %-10.4f | %-12.4f\n', 'Etapa 1 - Inferior (Rs1)',  Vg_1_inf,  Vd_1_inf,  Vs_1_inf,  Ids_1_inf * 1000);
+fprintf('%-28s | %-10.4f | %-10.4f | %-10.4f | %-12.4f\n', 'Etapa 2 - Superior',      Vg_2_sup,  Vd_2_sup,  Vs_2_sup,  Ids_2_sup * 1000);
+fprintf('%-28s | %-10.4f | %-10.4f | %-10.4f | %-12.4f\n', 'Etapa 2 - Inferior (Rs2)',  Vg_2_inf,  Vd_2_inf,  Vs_2_inf,  Ids_2_inf * 1000);
+fprintf('==============================================================================\n');
+
