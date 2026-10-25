@@ -242,3 +242,50 @@ fprintf('3. Etapa 2:\n');
 fprintf('   Transistor Superior (M2_2): rds = %.2f Ω | gm = %.4f mS | mu = %.2f\n', rds2_1, gm2_1*1000, mu2_1);
 fprintf('   Transistor Inferior (M2_1): rds = %.2f Ω | gm = %.4f mS | mu = %.2f\n', rds2_2, gm2_2*1000, mu2_2);
 fprintf('=======================================================================\n');
+
+% =========================================================================
+% TABLA DE TENSIONES DE TERMINALES (Vg, Vd, Vs) E Ids
+% =========================================================================
+
+% --- 1. Transistor de Referencia (p-MOSFET: Mp) ---
+Vs_p  = Vdd - datos_ref(1)*Rref;
+Vg_p  = Vp;
+Vd_p  = Vp;
+Ids_p = datos_ref(1);
+
+% --- 2. Etapa 1 ---
+% Transistor Inferior (M1_1)
+Vs_11  = 0;
+Vg_11  = Vg1;
+Vd_11  = mejores_datos1(4); % Vds1_1
+Ids_11 = mejores_datos1(1);
+
+% Transistor Superior / Carga Cascode (M1_2)
+Vs_12  = Vd_11;
+Vg_12  = Vp;
+Vd_12  = Vdd - Ids_11 * Rd1;
+Ids_12 = mejores_datos1(1);
+
+% --- 3. Etapa 2 ---
+% Transistor Inferior (M2_1)
+Vs_21  = datos_etapa2(1) * opt_Rs2;
+Vg_21  = Vg2;
+Vd_21  = Vs_21 + datos_etapa2(4); % Vs + Vds2_1
+Ids_21 = datos_etapa2(1);
+
+% Transistor Superior / Carga Cascode (M2_2)
+Vs_22  = Vd_21;
+Vg_22  = Vp;
+Vd_22  = Vdd - Ids_21 * Rd2;
+Ids_22 = datos_etapa2(1);
+
+% --- IMPRESIÓN DE LA TABLA ---
+fprintf('\n================== TABLA DE TERMINALES DC (Vg, Vd, Vs, Ids) ==================\n');
+fprintf('%-25s | %-10s | %-10s | %-10s | %-12s\n', 'Transistor', 'Vg [V]', 'Vd [V]', 'Vs [V]', 'Ids [mA]');
+fprintf('------------------------------------------------------------------------------\n');
+fprintf('%-25s | %-10.4f | %-10.4f | %-10.4f | %-12.4f\n', 'Referencia (Mp)',           Vg_p,  Vd_p,  Vs_p,  Ids_p * 1000);
+fprintf('%-25s | %-10.4f | %-10.4f | %-10.4f | %-12.4f\n', 'Etapa 1 - Inferior (M1_1)', Vg_11, Vd_11, Vs_11, Ids_11 * 1000);
+fprintf('%-25s | %-10.4f | %-10.4f | %-10.4f | %-12.4f\n', 'Etapa 1 - Superior (M1_2)', Vg_12, Vd_12, Vs_12, Ids_12 * 1000);
+fprintf('%-25s | %-10.4f | %-10.4f | %-10.4f | %-12.4f\n', 'Etapa 2 - Inferior (M2_1)', Vg_21, Vd_21, Vs_21, Ids_21 * 1000);
+fprintf('%-25s | %-10.4f | %-10.4f | %-10.4f | %-12.4f\n', 'Etapa 2 - Superior (M2_2)', Vg_22, Vd_22, Vs_22, Ids_22 * 1000);
+fprintf('==============================================================================\n');
