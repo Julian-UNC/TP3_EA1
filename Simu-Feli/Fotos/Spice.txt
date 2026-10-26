@@ -11,3 +11,18 @@ Para vin barrido
 .step param Vin list 5m 10m 20m 50m 100m 150m 200m
 
 La ac paso de 100
+
+Impedancia
+.ac dec 100 10 1Meg
+V(Vin)/I(vin)
+V(out)/I(i1)
+
+barridos de freq para ganancia
+
+.ac dec 100 10 100k
+.meas AC Av2_10   FIND mag(V(Vout)/V(Vin)) AT=10
+.meas AC Av2_100  FIND mag(V(Vout)/V(Vin)) AT=100
+.meas AC Av2_1k   FIND mag(V(Vout)/V(Vin)) AT=1k
+.meas AC Av2_10k  FIND mag(V(Vout)/V(Vin)) AT=10k
+.meas AC Av2_20k  FIND mag(V(Vout)/V(Vin)) AT=20k
+.meas AC Av2_100k FIND mag(V(Vout)/V(Vin)) AT=100k
