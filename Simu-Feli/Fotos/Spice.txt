@@ -1,0 +1,13 @@
+Para el thd:
+
+.param freq=1k
+.step param freq list 1k 5k 10k 15k 20k 100k
+.four {freq} V(vout)
+.tran 0 {20/freq} {2/freq}
+
+Para vin barrido
+
+.tran 0 9.3m 9m
+.step param Vin list 5m 10m 20m 50m 100m 150m 200m
+
+La ac paso de 100
