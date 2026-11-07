@@ -5,23 +5,25 @@ Rd2  = 1500;     % 1.5 kΩ
 Rl   = 1000;     % Resistencia de carga Rl [Ω]
 Rs1  = 270;
 Rs2  = 100;
+Rl   = 1000;
 
-rds1 = 2793.71;
+rds1  = 2793.71;
 rdso1 = 616.25;
-rds2 = 751.97;
+rds2  = 751.97;
 rdso2 = 275.36;
 
-gm1 = 21.4264e-3;
-gmo1 = 21.4264e-3;
-gm2 = 31.9865e-3;
-gmo2 = 31.9865e-3;
+gm1   = 21.4264e-3;
+gmo1  = 21.4264e-3;
+gm2   = 31.9865e-3;
+gmo2  = 31.9865e-3;
 
-mu1 = rds1 * gm1;
+mu1  = rds1 * gm1;
 muo1 = rdso1 * gmo1;
-mu2 = rds2 * gm2;
+mu2  = rds2 * gm2;
 muo2 = rdso2 * gmo2;
 
 Co = 10e-6;
+Ci = 10e-6;
 Cc = 470e-6;
 
 %   ===========================
@@ -73,6 +75,7 @@ Ra11 = rdso1+Rs1*(muo1+1);
 RCs1 = 1/(1/Ra10+1/Ra11);
 
 wps1 = 400; %rad/s
+Cs1 = 1/(RCs1*wps1);
 fprintf('Cs1 = %.4f uF\n',(1/(RCs1*wps1))*1e6);
 
 %   ===========================
@@ -150,3 +153,64 @@ bode(fdtsinChf);
 ##
 ##figure(3);
 ##bode(fdtH);
+
+%% ETAPA 1
+
+Av1 = (-mu1*Rd1)/(rds1+Rd1);
+
+wi = 1/(Ci*Rb1);
+
+Rs1_eq = 1/( 1/(rdso1 + Rs1 * (muo1 + 1)) + (mu1 + 1)/(rds1 + Rd1));
+
+ws1 = 1/(Cs1*Rs1);
+
+Rc = Rd1 + rds1 + (mu1 + 1)*(rdso1 + Rd1*(muo1 + 1));
+
+wc = 1/(Cc*Rc);
+
+FdTE1 = (s^3 * Av1)/( (s + wi) * (s + ws1) * (s + wc));
+
+figure(3);
+bode(FdTE1);
+
+%% ETAPA 2 CON CHF
+
+Rdl = (Rd1*Rl)/(Rd1+Rl);
+
+Av2 = (-mu2*Rdl)/(Rdl + rds2);
+
+Rcc = 1/( 1/(rdso2 + (muo2 + 1)*Rs2) + 1/(rds2 + Rd2));
+
+wcc_e2 = 1/(Rcc*Cc);
+
+Ro = Rl + (Rd2*rds2)/(Rd2+rds2);
+
+wo = 1/(Ro*Co);
+
+FdTE2 = (Av2*s^2)/( (s+wcc) * (s+wo) * (1+s/wphf));
+
+figure(4);
+bode(FdTE2);
+
+% Corrección en el denominador de FdTE2:
+FdTE2 = (Av2 * s^2) / ((s + wcc) * (s + wo) * (1 + s/wphf));
+
+freqs = [10, 100, 1000, 10000, 20000, 100000];
+w_vec = 2 * pi * freqs;
+
+[mag1, ~] = bode(FdTE1, w_vec);
+[mag2, ~] = bode(FdTE2, w_vec);
+[mag_tot, ~] = bode(fdt, w_vec);
+
+mag1 = squeeze(mag1);
+mag2 = squeeze(mag2);
+mag_tot = squeeze(mag_tot);
+
+fprintf('\n========================================================\n');
+fprintf(' f (Hz)    |  |Etapa 1| (V/V) |  |Etapa 2| (V/V) |  |Total| (V/V)\n');
+fprintf('--------------------------------------------------------\n');
+for k = 1:length(freqs)
+    fprintf('%8d   | %13.4f | %13.4f | %11.4f\n', ...
+        freqs(k), mag1(k), mag2(k), mag_tot(k));
+end
+fprintf('========================================================\n');
