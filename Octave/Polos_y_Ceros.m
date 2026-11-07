@@ -72,8 +72,8 @@ Ra10 = 1/(1/Rd1 + 1/Ra9 + 1/Ra8);
 Ra11 = rdso1+Rs1*(muo1+1);
 RCs1 = 1/(1/Ra10+1/Ra11);
 
-Wps1 = 400; %rad/s
-fprintf('Cs1 = %.4f uF\n',(1/(RCs1*Wps1))*1e6);
+wps1 = 400; %rad/s
+fprintf('Cs1 = %.4f uF\n',(1/(RCs1*wps1))*1e6);
 
 %   ===========================
 %   ANÁLISIS EN ALTA FRECUENCIA
@@ -87,14 +87,15 @@ Cgd = Crss;
 Cds = Coss - Cgd;
 Cgs = Ciss - Cgd;
 
-Req = 1/(1/rds2+1/Rd2+1/Rl);
-wphf = 20e3;
+Req = 1/(1/Rd2+1/Rl);
+wphf = 2*3.14*20e3;
 
 Ceq = 1/(Req * wphf);
 
 Chf = Ceq - Cgd;
+Rd2l = (Rd2*Rl)/(Rd2+Rl);
 
-wzhf = 1 / (Ceq * Rd2);
+wzhf = 1 / (Ceq * Rd2l);
 wpg2 = wzhf;
 
 disp('');
@@ -105,16 +106,19 @@ fprintf('Wz %.4f  rad/s\n', wzhf);
 
 Rg2 = 2/3 * 1e6;
 Rb1 = rdso2 + Rs2 * (muo2 +1);
-Rth = 1/(1/rds1 + 1/Rd1 + 1/Rb1);
+Rth = 1/(+ 1/Rd1 + 1/Rb1);
 
 Rs = Rth * (mu2+1);
 Rgs = Rs + Rg2;
-Req = (Rg2 * Rs)/(Rg2+Rs);
+Req2 = (Rg2 * Rs)/(Rg2+Rs);
 
 wpgs = 1/(Cgs*Rgs)
-Ceq2 = 1/(wpg2*Req);
+Ceq2 = 1/(wpg2*Req2);
 Cg2 = Ceq - Cgd
 wzg2 = 1/(Ceq2*Rg2)
+
+
+polosinChf = 1/(Cgd*Rth);
 
 %   =========================
 %   FUNCIÓN DE TRANSFERENCIA
@@ -125,15 +129,24 @@ s = tf('s');
 
 Av =24.6879;
 
-num = s^4*(1 + s/wzhf)*(1 + s/wzg2);
-den = (s + wco)*(s + wcc)*(s + wphf)*(1 + s/wpg2)*(1 + s/wphf)*(1 + s/wpgs);
-fdt = Av *num/den;
+numL = s^3;
+denL = (s + wco)*(s + wcc)*(s + wps1);
+fdtL = Av *numL/denL;
+
+fdtH = Av/(1+s/wphf);
+
+fdt = Av/(1+s/wphf) * numL/denL;
+
+fdtsinChf = Av/(1+s/polosinChf) * numL/denL;
 
 figure(1);
 bode(fdt);
 
-##figure(2);
-##pzmap(fdt);
-##grid on;
+figure(2);
+bode(fdtsinChf);
 
-
+##polo = 1/(Ceq*Req)
+##1/polo
+##
+##figure(3);
+##bode(fdtH);

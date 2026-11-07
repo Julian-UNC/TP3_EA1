@@ -8,11 +8,11 @@ K    = 0.056;     % Constante del MOSFET [A/V^2]
 Vt   = 2;         % Tensión de umbral [V]
 Vdd  = 12;        % Tensión de alimentación [V]
 
-Rg1a = 2e6;       % 2 MΩ
+Rg1a = 2.2e6;       % 2 MΩ
 Rg2a = 1e6;       % 1 MΩ
 Rd1  = 2200;      % 2.2 kΩ
 
-Rg1b = 2e6;       % 2 MΩ
+Rg1b = 2.2e6;       % 2 MΩ
 Rg2b = 1e6;       % 1 MΩ
 Rd2  = 1500;      % 1.5 kΩ
 Rl   = 10e3;      % Resistencia de carga (10 kΩ)
