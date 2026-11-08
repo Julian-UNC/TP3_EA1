@@ -1,0 +1,138 @@
+\subsection{1. Análisis Global del Amplificador (Simulación Integral)}
+
+\subsubsection{Esquemático y Caracterización General}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\linewidth]{Simu-Feli/Fotos/Spice-completo.jpg}
+    \caption{Esquemático completo del amplificador MOSFET de 2 etapas en LTspice.}
+    \label{fig:circuito_global}
+\end{figure}
+
+\subsubsection{1.1. Ganancia y Ancho de Banda}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Simu-Feli/Fotos/Barrido_Vin_voltaje.jpg}
+        \caption{Ganancia transitoria.}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Simu-Feli/Fotos/Av_total.jpg
+        }
+        \caption{Ganancia de tensión total $A_v$.}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Simu-Feli/Fotos/BW-ConChf.jpg
+        }
+        \caption{Ancho de banda con $C_{hf}$.}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Simu-Feli/Fotos/BW-SinChf.jpg}
+        \caption{Ancho de banda sin $C_{hf}$.}
+    \end{minipage}
+\end{figure}
+
+\subsubsection{1.2. Impedancias Globales ($Z_{in}$ y $Z_{out}$)}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Simu-Feli/Fotos/Impedancia_In_TOAL.jpg}
+        \caption{Montaje de medición de la impedancia de entrada total $Z_{in}$.}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Simu-Feli/Fotos/Imp_salida_total_bode.jpg}
+        \caption{Montaje de medición de la impedancia de salida total $Z_{out}$.}
+    \end{minipage}
+\end{figure}
+
+
+% =========================================================================
+% APARTADO 2: ETAPA 1
+% =========================================================================
+\subsection{2. Primera Etapa del Amplificador MOSFET}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\linewidth]{Simu-Feli/Fotos/Etapa1_Aislada.jpg}
+    \caption{Circuito esquemático de la primera etapa aislada.}
+\end{figure}
+
+\subsubsection{Ganancia y Ancho de Banda}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Simu-Feli/Fotos/Av_Etapa1.jpg}
+        \caption{Ganancia de tensión de la etapa 1.}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Simu-Feli/Fotos/Bw_e1.jpg}
+        \caption{Ancho de banda de la etapa 1.}
+    \end{minipage}
+\end{figure}
+
+\subsubsection{Impedancias de la Etapa 1 ($Z_{in1}$ y $Z_{out1}$)}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Simu-Feli/Fotos/Impedancia_In_E1_bode.jpg}
+        \caption{Impedancia de entrada $Z_{in1}$.}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Simu-Feli/Fotos/Zout_Etapa_1_bode.jpg}
+        \caption{Impedancia de salida $Z_{out1}$.}
+    \end{minipage}
+\end{figure}
+
+% =========================================================================
+% APARTADO 3: ETAPA 2
+% =========================================================================
+\subsection{3. Segunda Etapa del Amplificador MOSFET}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\linewidth]{Simu-Feli/Fotos/Etapa2_Aislada.jpg}
+    \caption{Circuito esquemático de la segunda etapa aislada.}
+\end{figure}
+
+\subsubsection{Ganancia y Ancho de Banda}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Simu-Feli/Fotos/AV_Etapa2_sinchf.jpg}
+        \caption{Ganancia etapa 2 (sin $C_{hf}$).}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Simu-Feli/Fotos/Av_Etapa2.jpg}
+        \caption{Ganancia etapa 2 general.}
+    \end{minipage}
+\end{figure}
+
+\subsubsection{Impedancias de la Etapa 2 ($Z_{in2}$ y $Z_{out2}$)}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Simu-Feli/Fotos/Zin_etapa2_bode.jpg}
+        \caption{Impedancia de entrada $Z_{in2}$.}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Simu-Feli/Fotos/Zout_etapa_2_bode.jpg}
+        \caption{Impedancia de salida $Z_{out2}$.}
+    \end{minipage}
+\end{figure}

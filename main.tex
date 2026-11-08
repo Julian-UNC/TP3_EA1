@@ -17,6 +17,7 @@
 \usepackage{newtxtext} % Carga la tipografía Times New Roman para todo el documento
 \usepackage{titlesec}  % Permite formatear los títulos
 \usepackage{hyperref}
+\usepackage{float}
 
 % Definición de tamaños exactos con tipografía Times (tamaño, interlineado recomendado)
 \newcommand{\sizedieciocho}{\fontsize{18}{22}\selectfont}
@@ -77,7 +78,7 @@
 \setcounter{tocdepth}{3}    % Obliga al índice a mostrar los títulos hasta sub-subsecciones
 
 \begin{document}
-\input{TP2_EA1/portada}
+\input{Archivostex/portada}
 \newpage
 \vspace*{\fill} %Pongo una pagina en blanco llena
 \newpage
@@ -87,13 +88,13 @@
 \newpage
 \listoftables
 \newpage
-\input{TP2_EA1/Intro}
+%\input{TP2_EA1/Intro}
 \newpage
-\input{TP2_EA1/Marco_teorico}
+%\input{TP2_EA1/Marco_teorico}
 \newpage
-\input{TP2_EA1/Desarrollo}
+\input{Archivostex/Desarrollo}
 \newpage
-\input{TP2_EA1/Conclusion}
+%\input{TP2_EA1/Conclusion}
 \newpage
 \printbibliography
 \end{document}
