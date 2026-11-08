@@ -2,7 +2,15 @@
 
 \subsection{Diseño}
 
+El objetivo pricipal del diseño era tener la mayor ganancia posible manteniendo la máxima excursión simétrica. Para lograrlo, ya con el amplificador modelado, se iteró sobre los valores de la resistencia $R_{ref}$ y las de fuente de los transistores utilizados como fuente de corriente, calculando las condiciones de polarización de los transistores y el valor de la ganancia para encontrar el punto óptimo.
 
+Este proceso iterativo se hizo a traves del software Octave y con asistencia de la inteligencia artificial Gémini, se le dio el conjunto de ecuaciones que lo describen así como el modelo en pequeña señal en forma de netlist generada con LTSpice, para que iterara sobre estos valores hasta maximizar la ganancia sin perder capacidad de excursión.
+
+Con las resistencias calculadas se pudieron estimar todas las condiciones de polarización y calcular $C_{s1}$ y $C_{hf}$, tomando $C_{s1}$ como el generador del polo dominante y fijando la frecuencia del polo de $C_{s1}$ en 20kHz.
+
+Si bien hacer los cálculos por software permite tener una mayor precisión, se dice que los valores se estimaron debido a los parámetros de los transistores. La característica de los MosFets varía significativamente entre transistores, y es de particular interes el valor de K, con el que se calcula la polarización. Si bien se utilizó la hoja de datos \cite{2N7000}, los valores reales de los transistores utilizados pueden variar, modificando las condiciones de polarización y, por consecuencia, la ganancia.
+
+Si bien los valores son verificados por simulación, esta puede presentar el mismo inconveniente, por lo que se optó por utilizar presets en la ubicación de las resistencias variables cistas en \ref{Amplificador Completo}. De esta forma se pueden ajustar los valores de las tensiones de polarización y la ganancia con el circuito construido.
 
 \input{Archivostex/simulacion}
 

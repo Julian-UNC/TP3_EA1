@@ -45,7 +45,7 @@ El modelo en peuqeña señal no alcanza para analizar el comportamiento en alta 
 Si bien el modelo es distinto, la frecuencia del polo se calcula de la misma forma que en baja frecuencia, la distinción es que no hay ceros que contribuyan en alta frecuencia. En la función de transferencia las contribuciones de los ceros y polos en baja se expresan como $s + \omega_{Z}$ y $s + \omega_{P}$ y las de alta frecuencia como $1 + \frac{s}{\omega_{P}}$. La función de trasferencia de este amplificador se puede escribir como:
 
 \begin{equation}
-  A_{V}(s) = \frac{A_V \cdot s^3}{(s + \omega_{Co}) \cdot (s + \omega_{Cc}) \cdot (s + \omega_{Cs1}) \cdot (1 + \frac{s}{\omega_{Chf}})}}
+  A_{V}(s) = \frac{A_V \cdot s^3}{(s + \omega_{Co}) \cdot (s + \omega_{Cc}) \cdot (s + \omega_{Cs1}) \cdot (1 + \frac{s}{\omega_{Chf}})}
 \end{equation}
 
 La ausencia de $C_i$ y del posible polo en alta frecuencia generado por $M_1$ es debido a que, para simplificar el análisis, solo se tuvieron en cuenta las contribuciones en alta frecuencia de la última etapa, ya que el objetivo de $C_{hf}$ es limitar el ancho de banda, por lo que las contribuciones del capacitor parásito en alta de $M_1$ serían despreciables. Por otro lado, la resistencia equivalente de $C_i$ haría que su polo fuera despreciable, por lo que tampoco se tuvieron en cuenta sus contribuciones.
