@@ -1,0 +1,82 @@
+\begin{figure}[htbp]
+    \centering
+    \begin{circuitikz}[scale=0.8, transform shape]
+        % Rieles de alimentación superior e inferior
+        \draw (0,6) -- (14,6);
+        \draw (7,6) node[ocirc] {} node[above] {$V_{CC} \quad 12\text{V}$};
+        \draw (0,0) -- (14,0);
+        \draw (7,0) node[ground] {};
+
+        % --- ETAPA 1 ---
+        % Entrada e capacitor de acoplamiento Ci
+        \draw (0,3) node[left] {$v_{in}$} node[ocirc] {} 
+              to[C, l=$C_i$, l_=$10\,\mu\text{F}$] (2,3) node[circ] (vin_node) {};
+        
+        % Divisor de tensión de entrada (R_G1a y R_G2a) con fusible/puente arriba
+        \draw (2,6) to[fuse] (2,4.5) to[R, l=$R_{G1a}$, l_=$2\,\text{M}\Omega$] (2,3);
+        \draw (2,3) to[R, l=$R_{G2a}$, l_=$1\,\text{M}\Omega$] (2,0);
+
+        % Transistor M1 (NMOS)
+        \node[nmos] (M1) at (4.5, 3.5) {$M_1$};
+        \draw (vin_node) -- (M1.gate);
+
+        % Drenador de M1 con RD1 y puente
+        \draw (4.5,6) to[fuse] (4.5,5) to[R, l=$R_{D1}$, l_=$2.2\,\text{k}\Omega$] (M1.drain);
+        \draw (M1.drain) node[circ] (drain1) {};
+
+        % Transistor MO1 (Cascode inferior)
+        \node[nmos] (MO1) at (4.5, 1.5) {$M_{O1}$};
+        \draw (M1.source) -- (MO1.drain);
+        \draw (MO1.gate) node[ocirc] {} node[left] {$V_p$} -- (3.5,1.5);
+
+        % Resistencia de fuente variable RS2 y capacitor CS1 en paralelo
+        \draw (MO1.source) to[vR, l=$R_{S2}$] (4.5,0) node[circ] {};
+        \draw (5.5,1.5) -- (5.5,0) to[C, l_=$C_{S1}$] (5.5,1.5);
+        \draw (4.5,1.5) -- (5.5,1.5);
+
+        % --- ACOPLAMIENTO ENTRE ETAPAS (Cc) ---
+        \draw (drain1) to[C, l=$C_c$, l_=$470\,\mu\text{F}$] (8.5, 3.5) node[circ] (gate2_node) {};
+
+        % --- ETAPA 2 ---
+        % Red de polarización central y capacitor CHF
+        \draw (7.5,6) to[fuse] (7.5,5) to[C, l=$C_{HF}$] (7.5,3.8);
+        \draw (7.5,4.5) to[R, l=$R_{G1b}$, l_=$2\,\text{M}\Omega$] (7.5,3);
+        \draw (7.5,3) node[circ] {} -- (gate2_node);
+        \draw (7.5,3) to[R, l=$R_{G2b}$, l_=$1\,\text{M}\Omega$] (7.5,0);
+        \draw (6.2,6) -- (6.2,4.8) -- (7.5,4.8); % Conexión superior de CHF
+
+        % Transistor M2 (NMOS)
+        \node[nmos] (M2) at (10, 3.5) {$M_2$};
+        \draw (gate2_node) -- (M2.gate);
+
+        % Drenador de M2 con RD2
+        \draw (10,6) to[fuse] (10,5) to[R, l=$R_{D2}$, l_=$1.5\,\text{k}\Omega$] (M2.drain);
+        \draw (M2.drain) node[circ] (drain2) {};
+
+        % Transistor MO2
+        \node[nmos] (MO2) at (10, 1.5) {$M_{O2}$};
+        \draw (M2.source) -- (MO2.drain);
+        \draw (MO2.gate) node[ocirc] {} node[left] {$V_p$} -- (9,1.5);
+
+        % Resistencia RS2 y capacitor CG2 en paralelo
+        \draw (MO2.source) to[vR, l=$R_{S2}$] (10,0) node[circ] {};
+        \draw (11,1.5) -- (11,0) to[C, l_=$C_{G2}$] (11,1.5);
+        \draw (10,1.5) -- (11,1.5);
+
+        % Salida v_out
+        \draw (drain2) to[C, l=$C_o$, l_=$10\,\mu\text{F}$] (12,3.5) node[circ] {} 
+              to[open, v=$v_{out}$] (12,3.5); % Alternativa para la terminal de salida
+        \draw (12,3.5) node[ocirc] {} node[right] {$v_{out}$};
+
+        % --- RAMA DE REFERENCIA (Derecha) ---
+        \draw (13,6) to[fuse] (13,4.5) to[vR, l=$R_{REF}$] (13,2.5) node[circ] (ref_node) {};
+        \node[nmos] (MREF) at (13, 1.2) {$M_{REF}$};
+        \draw (ref_node) -- (MREF.drain);
+        \draw (MREF.gate) -- (12,1.2) node[ocirc] {} node[left] {$V_p$};
+        \draw (MREF.gate) -- (12,1.2) |- (ref_node); % Conexión en configuración diodo
+        \draw (MREF.source) -- (13,0);
+
+    \end{circuitikz}
+    \caption{Esquema circuital en CircuitTikz}
+    \label{fig:circuito}
+\end{figure}
