@@ -1,0 +1,207 @@
+\subsection{Resultados}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\textbf{Componente} & \textbf{Valor} & \textbf{Diseño} & \textbf{Simulación} & \textbf{Medición} & \textbf{$\Delta$\%} \\ \hline
+Rg1a & 2M & 0,03 & 0,03 & 0,03 & 0,15 \\ \hline
+Rg12a & 1M & 0,02 & 0,02 & 0,01 & 0,67 \\ \hline
+Rg1b & 2M & 0,03 & 0,03 & 0,03 & -0,03 \\ \hline
+Rg2b & 1M & 0,02 & 0,02 & 0,01 & 0,54 \\ \hline
+Rd1 & 2.2k & 9,16 & 8,05 & 11,36 & -0,29 \\ \hline
+Rd2 & 1.5k & 31,29 & 27,32 & 35,23 & -0,22 \\ \hline
+Rs1 & 270 & 1,12 & 0,99 & 0,57 & 0,74 \\ \hline
+Rs2 & 100 & 2,09 & 1,82 & 0,66 & 1,76 \\ \hline
+Rref & 300 & 285,68 & 317,34 & 78,08 & 3,06 \\ \hline
+M1 & 2N7000 & 11,64 & 10,56 & 6,99 & 0,51 \\ \hline
+Mo1 & 2N7000 & 2,57 & 3,36 & 2,79 & 0,20 \\ \hline
+M2 & 2N7000 & 15,69 & 14,57 & 4,29 & 2,40 \\ \hline
+Mo2 & 2N7000 & 5,74 & 7,50 & 2,26 & 2,32 \\ \hline
+Mref & 2N7000 & 285,68 & 72,94 & 16,40 & 3,45 \\ \hline
+\end{tabular}
+\caption{Potencia mW por componente (Diseño, Simulación y Medición)}
+\label{tab:potencia_mW}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Impedancia} & \textbf{Diseño} & \textbf{Simulación} & \textbf{Medición} & \textbf{$\Delta$\%} \\ \hline
+Zin1 & 667000,00 & 669000,00 & 89100,00 & 6,51 \\ \hline
+Zin2 & 283,17 & 50,00 & 52,70 & -0,05 \\ \hline
+Zint & 667000,00 & 630000,00 & 89100,00 & 6,07 \\ \hline
+Zout1 & 2182,50 & 2200,00 & 1539,00 & 0,43 \\ \hline
+Zout2 & 1433,30 & 1480,00 & 1070,00 & 0,38 \\ \hline
+Zoutt & 1433,30 & 1492,00 & 1070,00 & 0,39 \\ \hline
+\end{tabular}
+\caption{Impedancias (Diseño, Simulación y Medición)}
+\label{tab:impedancias}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{f [Hz]} & \textbf{Diseño} & \textbf{Simulación} & \textbf{Medición} & \textbf{$\Delta$\%} \\ \hline
+10 & 2,95 & 1,55 & 1,38 & 0,12 \\ \hline
+100 & 16,60 & 9,79 & 6,13 & 0,60 \\ \hline
+1000 & 21,37 & 11,51 & 11,20 & 0,03 \\ \hline
+10000 & 21,37 & 10,33 & 10,40 & -0,01 \\ \hline
+20000 & 15,45 & 8,16 & 6,67 & 0,22 \\ \hline
+100000 & 4,57 & 2,26 & 2,33 & -0,03 \\ \hline
+\end{tabular}
+\caption{Ganancia Total ($A_v$ total) frente a la frecuencia}
+\label{tab:av_total}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{f [Hz]} & \textbf{Diseño} & \textbf{Simulación} & \textbf{Medición} & \textbf{$\Delta$\%} \\ \hline
+10 & 10,57 & 3,41 & 4,55 & -0,25 \\ \hline
+100 & 25,98 & 18,24 & 21,46 & -0,15 \\ \hline
+1000 & 26,37 & 21,43 & 24,26 & -0,12 \\ \hline
+10000 & 26,37 & 21,48 & 23,73 & -0,09 \\ \hline
+20000 & 26,37 & 21,48 & 25,43 & -0,16 \\ \hline
+100000 & 26,37 & 21,48 & 27,02 & -0,21 \\ \hline
+\end{tabular}
+\caption{Ganancia de la Etapa 1 ($A_v$ E1) frente a la frecuencia}
+\label{tab:av_e1}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{f [Hz]} & \textbf{Diseño} & \textbf{Simulación} & \textbf{Medición} & \textbf{$\Delta$\%} \\ \hline
+10 & 7,88 & 0,32 & 4,84 & -0,93 \\ \hline
+100 & 11,42 & 3,69 & 5,07 & -0,27 \\ \hline
+1000 & 11,47 & 14,58 & 4,80 & 2,04 \\ \hline
+10000 & 10,27 & 17,77 & 5,27 & 2,37 \\ \hline
+20000 & 8,12 & 14,05 & 1,97 & 6,13 \\ \hline
+100000 & 2,25 & 3,89 & 0,54 & 6,20 \\ \hline
+\end{tabular}
+\caption{Ganancia de la Etapa 2 ($A_v$ E2) frente a la frecuencia}
+\label{tab:av_e2}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+\multirow{2}{*}{\textbf{Entrada}} & \multicolumn{4}{c|}{\textbf{$V_{o\text{pp}}$ T [mV]}} & \multicolumn{4}{c|}{\textbf{$A_v$ T}} \\ \cline{2-9}
+ & \textbf{Diseño} & \textbf{Simulación} & \textbf{Medición} & \textbf{$\Delta$\%} & \textbf{Diseño} & \textbf{Simulación} & \textbf{Medición} & \textbf{$\Delta$\%} \\ \hline
+5 & 123,44 & 103,00 & 102,00 & 0,01 & 24,69 & 10,30 & 10,20 & 0,01 \\ \hline
+10 & 246,88 & 206,30 & 202,00 & 0,02 & 24,69 & 10,31 & 10,10 & 0,02 \\ \hline
+20 & 493,76 & 411,26 & 362,00 & 0,14 & 24,69 & 10,28 & 9,05 & 0,14 \\ \hline
+50 & 1234,40 & 1006,00 & 904,00 & 0,11 & 24,69 & 10,06 & 9,04 & 0,11 \\ \hline
+100 & 2468,79 & 1878,00 & 1740,00 & 0,08 & 24,69 & 9,39 & 8,70 & 0,08 \\ \hline
+150 & 3703,19 & 2546,00 & 2440,00 & 0,04 & 24,69 & 8,46 & 8,13 & 0,04 \\ \hline
+200 & 4937,58 & 3041,00 & 2920,00 & 0,04 & 24,69 & 7,60 & 7,30 & 0,04 \\ \hline
+\end{tabular}%
+}
+\caption{Tensión de salida pico a pico ($V_{o\text{ pp}}$ T) y Ganancia total ($A_v$ T) a $f = 5\,\text{kHz}$}
+\label{tab:vo_pp_av_t}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\textbf{Condición} & \textbf{Parámetro} & \textbf{Diseño} & \textbf{Simulación} & \textbf{Medición} & \textbf{$\Delta$\%} \\ \hline
+\multirow{3}{*}{Sin Chf} & fl & 63,66 & 61,00 & 130,00 & -0,53 \\ \cline{2-6} 
+ & fh & 31800000,00 & 10000000,00 & 100000,00 & 99,00 \\ \cline{2-6} 
+ & BW & 31800000,00 & 10000000,00 & 100000,00 & 99,00 \\ \hline
+\multirow{3}{*}{Con Chf} & fl & 63,66 & 61,00 & 130,00 & -0,53 \\ \cline{2-6} 
+ & fh & 19767,00 & 19000,00 & 17000,00 & 0,12 \\ \cline{2-6} 
+ & BW & 19703,34 & 18939,00 & 16870,00 & 0,12 \\ \hline
+\end{tabular}
+\caption{Ancho de Banda Total ($f_L$, $f_H$ y $BW$) con y sin $C_{hf}$}
+\label{tab:ancho_de_banda}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Parámetro} & \textbf{Diseño} & \textbf{Simulación} & \textbf{Medición} & \textbf{$\Delta$\%} \\ \hline
+fl & 63,66 & 72,00 & 70,00 & 0,03 \\ \hline
+fh & Inf & 3300000,00 & 100000,00 & 32,00 \\ \hline
+BW & Inf & 3300000,00 & 100000,00 & 32,00 \\ \hline
+\end{tabular}
+\caption{Ancho de Banda de la Etapa 1 ($f_L$, $f_H$ y $BW$)}
+\label{tab:ancho_de_banda_e1}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\textbf{Condición} & \textbf{Parámetro} & \textbf{Diseño} & \textbf{Simulación} & \textbf{Medición} & \textbf{$\Delta$\%} \\ \hline
+\multirow{3}{*}{Sin Chf} & fl & 13,05 & 340,00 & 10,00 & 33,00 \\ \cline{2-6} 
+ & fh & Inf & 4800000,00 & 100000,00 & 47,00 \\ \cline{2-6} 
+ & BW & Inf & 4800000,00 & 100000,00 & 47,00 \\ \hline
+\multirow{3}{*}{Con Chf} & fl & 13,05 & 340,00 & 10,00 & 33,00 \\ \cline{2-6} 
+ & fh & 19082,68 & 22500,00 & 13000,00 & 0,73 \\ \cline{2-6} 
+ & BW & 19069,63 & 21200,00 & 13000,00 & 0,63 \\ \hline
+\end{tabular}
+\caption{Ancho de Banda de la Etapa 2 ($f_L$, $f_H$ y $BW$) con y sin $C_{hf}$}
+\label{tab:ancho_de_banda_e2}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Vin pp 5m} & \textbf{Diseño} & \textbf{Simulación} & \textbf{Medición} & \textbf{$\Delta$\%} \\ \hline
+10000 & 0,00 & 0,71 & 1,71 & -0,58 \\ \hline
+15000 & 0,00 & 45,82 & 25,20 & 0,82 \\ \hline
+20000 & 0,00 & 47,24 & 16,77 & 1,82 \\ \hline
+100000 & 0,00 & 79,30 & 40,80 & 0,94 \\ \hline
+\end{tabular}
+\caption{Distorsión Armónica Total ($\text{THD T }[\%]$)}
+\label{tab:thd_t}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Vin pp 5kHz} & \textbf{Diseño} & \textbf{Simulación} & \textbf{Medición} & \textbf{$\Delta$\%} \\ \hline
+10000 & 0,00 & 0,90 & 1,14 & -0,21 \\ \hline
+15000 & 0,00 & 47,46 & 17,20 & 1,76 \\ \hline
+20000 & 0,00 & 23,22 & 10,60 & 1,19 \\ \hline
+100000 & 0,00 & 79,80 & 22,80 & 2,50 \\ \hline
+\end{tabular}
+\caption{Distorsión Armónica de la Etapa 1 ($\text{THD E1}$)}
+\label{tab:thd_e1}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Vin pp 5kHz} & \textbf{Diseño} & \textbf{Simulación} & \textbf{Medición} & \textbf{$\Delta$\%} \\ \hline
+10000 & 0,00 & 0,60 & 1,23 & -0,51 \\ \hline
+15000 & 0,00 & 47,51 & 11,20 & 3,24 \\ \hline
+20000 & 0,00 & 23,17 & 5,30 & 3,37 \\ \hline
+100000 & 0,00 & 80,00 & 20,30 & 2,94 \\ \hline
+\end{tabular}
+\caption{Distorsión Armónica de la Etapa 2 ($\text{THD E2}$)}
+\label{tab:thd_e2}
+\end{table}
