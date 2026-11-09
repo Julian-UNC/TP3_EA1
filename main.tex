@@ -1,88 +1,68 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} % Recomendado para documentos en español
 \usepackage{graphicx}
 \usepackage[spanish,es-tabla]{babel}
 \usepackage{amsmath}
 \usepackage[a4paper,margin=1in]{geometry}
 \usepackage{subcaption}
 \usepackage{amssymb}
-\usepackage[hidelinks]{hyperref}
 \usepackage{mathtools}
 \usepackage[table,xcdraw]{xcolor}
-\usepackage{biblatex}
 \usepackage{enumitem}
 \usepackage{csquotes}
-\usepackage{circuitikz}
-\usepackage{siunitx}
-\usepackage{newtxtext} % Carga la tipografía Times New Roman para todo el documento
-\usepackage{titlesec}  % Permite formatear los títulos
-\usepackage{hyperref}
-\usepackage{float}
+\usepackage[siunitx, american]{circuitikz}
+\usepackage{newtxtext} % Tipografía Times New Roman
+\usepackage{titlesec}  % Formato de títulos
+\usepackage{standalone}
 \usepackage{multicol}
 \usepackage{multirow}
+\usepackage[colorlinks=true, linkcolor=black, citecolor=black, urlcolor=black, filecolor=black]{hyperref}
+\usepackage{cleveref}
+\usepackage{float}
+\usepackage[backend=biber, style=numeric]{biblatex} % Carga el paquete compatible con biber
+\addbibresource{bibliografia.bib} % Vincula el archivo que acabas de crear
+\usepackage{url}
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  postbreak=\mbox{\textcolor{black}{$\hookrightarrow$}\space}
+}
 
-% Definición de tamaños exactos con tipografía Times (tamaño, interlineado recomendado)
+% Definición de tamaños exactos
 \newcommand{\sizedieciocho}{\fontsize{18}{22}\selectfont}
 \newcommand{\sizedieciseis}{\fontsize{16}{20}\selectfont}
 \newcommand{\sizecatorce}{\fontsize{14}{18}\selectfont}
 \newcommand{\sizedoce}{\fontsize{12}{16}\selectfont}
 
-% 1. Secciones (\section) - Tamaño 18
-\titleformat{\section}
-  {\normalfont\sizedieciocho\bfseries} % Times New Roman, 18pt, Negrita
-  {}
-  {0pt}
-  {}
+% Formato de títulos
+\titleformat{\section}{\normalfont\sizedieciocho\bfseries}{}{0pt}{}
+\titleformat{\subsection}{\normalfont\sizedieciseis\bfseries}{}{0pt}{}
+\titleformat{\subsubsection}{\normalfont\sizecatorce\bfseries}{}{0pt}{}
 
-% 2. Subsecciones (\subsection) - Tamaño 16
-\titleformat{\subsection}
-  {\normalfont\sizedieciseis\bfseries} % Times New Roman, 16pt, Negrita
-  {}
-  {0pt}
-  {}
-
-% 3. Sub-subsecciones (\subsubsection) - Tamaño 14
-\titleformat{\subsubsection}
-  {\normalfont\sizecatorce\bfseries} % Times New Roman, 14pt, Negrita
-  {}
-  {0pt}
-  {}
-
-  % --- CONFIGURACIÓN DE INDENTACIÓN Y ESPACIOS ---
-% Sintaxis: \titlespacing*{<comando>}{<indentación izquierda>}{<espacio antes>}{<espacio después>}
-
-% Secciones: Sin indentación izquierda (0pt)
+% Indentación y espacios de títulos
 \titlespacing*{\section}{0pt}{14pt}{8pt}
-
-% Subsecciones: Indentadas 0.5 centímetros hacia la derecha
 \titlespacing*{\subsection}{0.5cm}{12pt}{6pt}
-
-% Sub-subsecciones: Indentadas 1.0 centímetro hacia la derecha
 \titlespacing*{\subsubsection}{1.0cm}{10pt}{4pt}
 
-%Formateo etiquetas
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,    
-    citecolor=blue,
-    urlcolor=blue,
-    filecolor=blue
-}
+% Configuración de referencias automáticas
+\crefname{figure}{Fig.}{Figuras}
+\crefname{table}{Tab.}{Tablas}
+\crefname{equation}{Ec.}{Ecuaciones}
 
-\addbibresource{bibliografia.bib} %archivo de bibliografia
-
-%Configuro referencias automáticas
+% Configuración de referencias con autoref (para \autoref{})
 \renewcommand{\figureautorefname}{Fig.}
 \renewcommand{\tableautorefname}{Tab.}
 \renewcommand{\equationautorefname}{Ec.}
 
-\setcounter{secnumdepth}{0} % Quita los números de los títulos
-\setcounter{tocdepth}{3}    % Obliga al índice a mostrar los títulos hasta sub-subsecciones
+\setcounter{secnumdepth}{0} % Sin numeración en títulos
+\setcounter{tocdepth}{3}    % Muestra hasta sub-subsecciones en el índice
 
 \begin{document}
 \input{Archivostex/portada}
 \newpage
-\vspace*{\fill} %Pongo una pagina en blanco llena
+\vspace*{\fill} 
 \newpage
 \tableofcontents
 \newpage
@@ -90,10 +70,13 @@
 \newpage
 \listoftables
 \newpage
-%\input{TP2_EA1/Intro}
+\input{Archivostex/Introduccion}
 \input{Archivostex/MarcoTeorico}
 \input{Archivostex/Desarrollo}
-%\input{TP2_EA1/Conclusion}
+\input{Archivostex/Conclusion}
 \newpage
+
 \printbibliography
+%\bibliographystyle{ieeetr}
+%\bibliography{bibliografia}
 \end{document}
