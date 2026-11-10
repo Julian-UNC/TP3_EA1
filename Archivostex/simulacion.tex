@@ -1,5 +1,22 @@
 \subsection{Simulación Integral, Análisis Global del Amplificador}
 
+\subsubsection{Fundamentación de Directivas SPICE Empleadas}
+Para la caracterización del amplificador MOSFET multietapa se empleó el entorno de simulación \textbf{LTspice®}. Las directivas fundamentales utilizadas son:
+
+\begin{itemize}
+    \item \texttt{.op} \textbf{(Punto de Operación DC):} Evalúa tensiones de nodo y corrientes de rama sin señal aplicada para verificar la región de saturación/triodo de los MOSFETs.
+    \item \texttt{.ac <type> <n> <fstart> <fstop>} \textbf{(Pequeña Señal AC):} Obtiene la respuesta en frecuencia (Bode), ganancias y magnitudes de $Z_{in}$ y $Z_{out}$.
+    \item \texttt{.tran <tstep> <tstop>} \textbf{(Análisis Transitorio):} Simula la respuesta temporal dinámica frente a excitaciones senoidales.
+    \item \texttt{.four <freq> V(out)} \textbf{(Análisis de Fourier):} Calcula la Distorsión Armónica Total (THD) sobre la salida.
+    \item \texttt{.step param <var> list <val1> <val2>...} \textbf{(Análisis Paramétrico):} Ejecuta barridos iterativos para evaluar límites operacionales y linealidad.
+\end{itemize}
+
+\subsubsection{Modelo SPICE del Transistor Empleado}
+Se incorporó el modelo estándar para los transistores MOSFET canales N utilizados en el diseño del circuito:
+\begin{verbatim}
+.model 2N7002 VTO=2.1 KP=0.5e-3 RD=0.2 RS=0.2 IS=1e-13 LAMBDA=0.01
+\end{verbatim}
+
 \subsubsection{Esquemático y Caracterización General}
 \begin{figure}[H]
     \centering

@@ -5,33 +5,33 @@
  Se obviaran las mediciones de tension y corrientes en las resistencias y los transistores FET dada su simplicidad.
 
 \subsubsection{Setup General}
-A continuación se vera un acercamiento a las formas de las mediciones a nivel general, las conexiones utilizadas y el espacio de trabajo.
+A continuación se verá un acercamiento a las formas de las mediciones a nivel general, las conexiones utilizadas y el espacio de trabajo.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\textwidth]{Imagenes/SetUp.jpeg}
-    \caption{Distribucion General}
+    \caption{Distribución General}
     \label{fig:DistribucionGeneral}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.35\textwidth]{Imagenes/SetupCercano.jpeg}
-    \caption{Conexion a Placa}
+    \caption{Conexión a Placa}
     \label{fig:placa}
 \end{figure}
 
-A fin de no alargar esta seccion y dadas que muchas de las mediciones tienen distribucione similares, se opto por mostrar la forma representativa esquematica de la distribucion de los instrumentos para cada una de las abarcadas con algunas excepciones.
+A fin de no alargar esta seccion y dado que muchas de las mediciones tienen distribucione similares, se optó por mostrar la forma representativa esquematica de la distribución de los instrumentos para cada una de las abarcadas con algunas excepciones.
 
 \subsubsection{Barrido de Amplitud}
 Esta medición es realizada en el circuito completo
 
-En esta, las amplitudes de entrada a las configuraciones irán aumentando, esto se realizo incrementando la amplitud de salida del generador de señales.
+En esta, las amplitudes de entrada a las configuraciones irán aumentando, esto se realizó incrementando la amplitud de salida del generador de señales.
 
 No se realiza el barrido de amplitud de las etapas por separado ya que se considera que no aportan información útil dado que la ganancia del circuito completo no varia significativamente ante el aumento de tensión en la entrada.
 
 \subsubsection{Barrido del circuito completo}
-Su unica distinción es que esta es realizada sin necesidad de modificar el circuito, se mide desde la entrada hasta la ultima etapa
+Su única distinción es que esta es realizada sin necesidad de modificar el circuito, se mide desde la entrada hasta la ultima etapa
 
 \begin{figure}[H]
     \centering
@@ -39,7 +39,7 @@ Su unica distinción es que esta es realizada sin necesidad de modificar el circ
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Imagenes/AvFFTtotal.png} % Ajusta el ancho al de la minipage
-        \caption{Representacion esquematica.}
+        \caption{Representación esquematica.}
         \label{fig:esquematicoBarCompleto}
     \end{minipage}
     \hfill % Relleno elástico para separar las imágenes
@@ -59,15 +59,17 @@ Su unica distinción es que esta es realizada sin necesidad de modificar el circ
     \label{fig:osciloscopioBarCompleto}
 \end{figure}
 
-Se puede ver en \ref{fig:osciloscopioBarCompleto}, dada una entrada proxima a loa 10mVpp, una ganancia cercana a los 9,1 veces la de entrada.
+Se puede ver en la figura \ref{fig:osciloscopioBarCompleto}, dada una entrada proxima a los 10 mV pico a pico, una ganancia cercana a los 9,1 veces la de entrada.
 
 \subsubsection{Barrido de Frecuencia}
-Realizada puramente observando el osciloscopio, se fue variando la frecuencia de salida del generador de decada en decada a medida que se realizaban los calculos de ganancia, la amplitud de entrada fue establecida en 5 mV pico a pico. También se Realizaron mediciones sin el CHF acoplado a partir de 1kHz en adelante.
+Realizada puramente observando el osciloscopio, se fue variando la frecuencia de salida del generador de decada en decada a medida que se realizaban los calculos de ganancia, la amplitud de entrada fue establecida en 5 mV pico a pico. También se realizaron mediciones sin el CHF acoplado a partir de 1kHz en adelante.
 
 Estas fueron realizadas en 3 configuraciones:
-- Etapa 1
-- Etapa 2
-- Circuito Completo
+\begin{itemize}
+  \item Etapa 1
+  \item Etapa 2
+  \item Circuito Completo
+\end{itemize}
 
 \paragraph{Barrido de Etapa 1}
 Utilizando la punta compensada conectada al osciloscopio se evaluó la tensión de salida de la primer etapa y se realizo el calculo de ganancia.
@@ -75,19 +77,19 @@ Utilizando la punta compensada conectada al osciloscopio se evaluó la tensión 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{Imagenes/Av-FFT-Zsc-1.png}
-    \caption{Esquematico}
+    \caption{Esquemático}
     \label{fig:osciloscopioBArFrec}
 \end{figure}
 
-No se realiza la diferenciacion de mediciones con y sin CHF dado que esta no interviene en esta etapa.
+No se realiza la diferenciacion de mediciones con y sin CHF dado que este no interviene en esta etapa.
 
 \paragraph{Barrido de Etapa 2}
-Al igual que con la medicion anterior y en la proxima, se uso la punta compensada conectada al osciloscopio para obtener las mediciones de tension
+Al igual que con la medicion anterior y en la proxima, se usó la punta compensada conectada al osciloscopio para obtener las mediciones de tensión.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{Imagenes/Av-FFT2.png}
-    \caption{Esquematico con CHF}
+    \caption{Esquemático con CHF}
     \label{fig:osciloscopiofrec12}
 \end{figure}
 
@@ -98,36 +100,38 @@ Al igual que con la medicion anterior y en la proxima, se uso la punta compensad
     \label{fig:esquematicosinCHF2}
 \end{figure}
 
-En la medicion vista en la figura \ref{fig:esquematicosinCHF2}, fue realizada desconectando uno de los jumpers de la placa.
+La medicion vista en la figura \ref{fig:esquematicosinCHF2}, fue realizada desconectando uno de los jumpers de la placa.
 
 \paragraph{Barrido en circuito completo}
-Sin casi variaciones, la medicion es reaizada observando la salida del circuito completo.
+Sin casi variaciones, la medición es reaizada observando la salida del circuito completo.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{Imagenes/AvFFTtotal.png}
-    \caption{Esquematico del circuito completo}
+    \caption{Esquemático del circuito completo}
     \label{fig:Avffttotal}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{Imagenes/AvsinCHF.png}
-    \caption{Esquematico sin CHF}
+    \caption{Esquemático sin CHF}
     \label{fig:AvffttotalSinCHF}
 \end{figure}
 
 \subsubsection{Total Harmonic Distorsion}
-Con la misma distribucion dada en el barrido de frecuencia, en este caso se utilizó la funcion de obtener la Transformada Rapida de Fourier (FFT) del osciloscopio para realizar los calculos de THD mediante:
+Con la misma distribución dada en el barrido de frecuencia, en este caso se utilizó la funcion de obtener la Transformada Rapida de Fourier (FFT) del osciloscopio para realizar los calculos de THD mediante:
 
 \[
 \mathrm{THD} = \frac{\sqrt{V_2^2 + V_3^2 + V_4^2 + \cdots + V_n^2}}{V_1}
 \]
 
-Como se dijo anteriormente, se midio en
-- Etapa 1
-- Etapa 2
-- Circuito Completo
+Como se dijo anteriormente, se midió en
+\begin{itemize}
+  \item Etapa 1
+  \item Etapa 2
+  \item Circuito Completo
+\end{itemize}
 
 \paragraph{FFT de Etapa 1}
 Utilizando la punta compensada conectada al osciloscopio se obtuvo la salida de la etapa 1 y se aplico la FFT, una vez impresa en la pantalla se realizaron los calculos pertientes para determinar la THD.
@@ -135,7 +139,7 @@ Utilizando la punta compensada conectada al osciloscopio se obtuvo la salida de 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{Imagenes/Av-FFT-Zsc-1.png}
-    \caption{Representacion Esquematica}
+    \caption{Representacion Esquemática}
     \label{fig:esquemaFFT1}
 \end{figure}
 
@@ -146,10 +150,10 @@ Utilizando la punta compensada conectada al osciloscopio se obtuvo la salida de 
     \label{fig:osciloscopioFFT1}
 \end{figure}
 
-En la Figura \ref{fig:osciloscopioFFT1}, se muestra la imagen de la FFT de la etapa 1 con una frecuencia de 10KHz con algunos armonicos presentes.
+En la Figura \ref{fig:osciloscopioFFT1}, se muestra la imagen de la FFT de la etapa 1 con una frecuencia de 10KHz con algunos armónicos presentes.
 
 \subsubsection{Barrido de Etapa 2}
-Aqui se conectan los jumpers necesarios y se cambia la posicion de la punta a la salida de la etapa 2.
+Aquí se conectan los jumpers necesarios y se cambia la posicion de la punta a la salida de la etapa 2.
 
 \begin{figure}[H]
     \centering
@@ -165,7 +169,7 @@ Aqui se conectan los jumpers necesarios y se cambia la posicion de la punta a la
     \label{fig:osciloscopioFFT12}
 \end{figure}
 
-Se puede ver en \ref{fig:osciloscopioFFT12} la ausencia de armonicos apreciables.
+Se puede ver en la firura \ref{fig:osciloscopioFFT12} la ausencia de armonicos apreciables.
 
 \paragraph{FFT de circuito completo}
 Con todos los jumpers conectados, se evalua la FFT del circuito final en la pantalla del osciloscopio 
@@ -173,7 +177,7 @@ Con todos los jumpers conectados, se evalua la FFT del circuito final en la pant
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{Imagenes/AvFFTtotal.png}
-    \caption{Esquematico}
+    \caption{Esquemático}
     \label{fig:EsquematicoFFTCompleto}
 \end{figure}
 
@@ -184,18 +188,20 @@ Con todos los jumpers conectados, se evalua la FFT del circuito final en la pant
     \label{fig:osciloscopioFFTCompleto}
 \end{figure}
 
-Se puede ver en \ref{fig:osciloscopioFFTCompleto} una ausencia total de armonicos.
+Se puede ver en la figura \ref{fig:osciloscopioFFTCompleto} una ausencia total de armonicos.
 
 \subsubsection{Impedancia De Salida y de Entrada}
-A continuacion se vera el método de medicion de las impedancias de salida y de entrada para las siguientes configuraciones
+A continuacion se vera el método de medición de las impedancias de salida y de entrada para las siguientes configuraciones
 
-Se midio en:
-- Etapa 1
-- Etapa 2
-- Circuito Completo
+Se midió en:
+\begin{itemize}
+  \item Etapa 1
+  \item Etapa 2
+  \item Circuito Completo
+\end{itemize}
 
 \paragraph{Zout}
-Para la medicion de impedancia de salida se trabajó en 2 partes para cada configuracion del equipo en pruebas, se midio la tensión a la salida en vacío y con carga conectada. Para todas las mediciones se utilizo una resistencia variable de orden de magnitud similar al esperado en la configuracion en medicion. Una vez obtenidas las mediciones se utilizó la siguiente ecuación:
+Para la medicion de impedancia de salida se trabajó en 2 partes para cada configuración del equipo en pruebas, se midió la tensión a la salida en vacío y con carga conectada. Para todas las mediciones se utilizo una resistencia variable de orden de magnitud similar al esperado en la configuracion en medición. Una vez obtenidas las mediciones se utilizó la siguiente ecuación:
 
 \[
 Z_{\mathrm{out}} = R_L \cdot \left( \frac{V_{\mathrm{vacio}} - V_{\mathrm{carga}}}{V_{\mathrm{carga}}} \right)
@@ -222,7 +228,7 @@ Para representar las mediciones se usará como ejemplo la medición de impedanci
 \end{figure}
 
 \paragraph{Zin}
-Para la medición de la impedancia de entrada el metodo fue diferente, se inyecto la señal atraves de una resistecnia en serie previa a la entrada de una magnitud similar a la impedancia esperada, dado que, si la tensión luego de la resistencia serie es la mitad que la proporcinaba por el generador, entonces la resistencia es exactamente igual a la Impedancia de entrada de la etapa bajo prueba.
+Para la medición de la impedancia de entrada el metodo fue diferente, se inyecto la señal atraves de una resistecnia en serie previa a la entrada de una magnitud similar a la impedancia esperada, dado que, si la tensión luego de la resistencia serie es la mitad que la proporcinaba por el generador, entonces la resistencia es exactamente igual a la impedancia de entrada de la etapa bajo prueba.
 
 Esto ocurre debido a el metodo de divisior de tension:
 \[
@@ -303,4 +309,4 @@ Se utilizará de ejemplo la medicion de impedancia de entrada total.
 
 Se puede ver en la figura \ref{fig:medicionZin_1} la utilización de combinaciones de resistencias en paralelo para encontrar la impedancia de entrada dada la ausencia de un potenciómetro de magnitud acorde, se fue iterando combinaciones de estas hasta que el osciloscopio de la mitad de la entrada.
 
-Dado que la amplitud del generador es de 42mV, su Vpp es de 82mV, en la pantalla del osciloscopio se deben observar los 42mVpp dispuestos.
+Dado que la amplitud del generador es de 42 mV, su Vpp es de 82 mV, en la pantalla del osciloscopio se deben observar los 42 mV pico a pico dispuestos.
