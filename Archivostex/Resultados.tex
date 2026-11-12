@@ -1,5 +1,13 @@
 \subsection{Resultados}
 
+Se puede ver en la tabla \ref{tab:potencia_mW} que las potencias de las resistencias de surtidor, la $R_{ref}$ y todos los transistores son menores a los valores de diseño y simulados. Esto ocurre porque, como se disutió anteriormente, los transistores pueden presentar variaciones significativas respecto del modelo, por ello, con los valores resistivos de diseño y simulación no se obtenían los valores de tensión deseados, por lo que se ajustaron los presets hasta conseguirlos, dejando los valores finales como:
+
+\begin{itemize}
+  \item $R_{s1} = 118 \omega$
+  \item $R_{s2} = 37.2 \omega$
+  \item $R_{ref} = 1200 \omega$
+\end{itemize}
+
 \begin{table}[H]
 \centering
 \begin{tabular}{|c|c|c|c|c|c|}
@@ -20,10 +28,11 @@ M2 & 2N7000 & 15,69 & 14,57 & 4,29 & 2,40 \\ \hline
 Mo2 & 2N7000 & 5,74 & 7,50 & 2,26 & 2,32 \\ \hline
 Mref & 2N7000 & 285,68 & 72,94 & 16,40 & 3,45 \\ \hline
 \end{tabular}
-\caption{Potencia mW por componente (Diseño, Simulación y Medición)}
+\caption{Potencia en mW por componente}
 \label{tab:potencia_mW}
 \end{table}
 
+Para el caso de las impedancias, tabla \ref{tab:impedancias}, se ve que no hay variación significativa entre los resultados. La mayores difenrencia se presentan en los valores de impedancia de entrada, para el caso  de $Z_{in1}$ y $Z_{int}$ su discrepancia se debe a que se diseñó y simulo con $2 M\omega$ pero el valor comercial dispinible es de $2 M\omega$, y en el caso de la $Z_{in2}$ su variación entre diseño y medición es debida al ajuste de las resistencias comentado.
 
 \begin{table}[H]
 \centering
@@ -37,10 +46,13 @@ Zout1 & 2182,50 & 2200,00 & 1539,00 & 0,43 \\ \hline
 Zout2 & 1433,30 & 1480,00 & 1070,00 & 0,38 \\ \hline
 Zoutt & 1433,30 & 1492,00 & 1070,00 & 0,39 \\ \hline
 \end{tabular}
-\caption{Impedancias (Diseño, Simulación y Medición)}
+\caption{Impedancias }
 \label{tab:impedancias}
 \end{table}
 
+Como era esperado, los valores de ganancia de diseño son mayores a los valores reales, aunque estos siguen cumpliendo los requisitos. Se ve en la tabla \ref{tab:av_total} que el amplificador presenta una respuesta muy similar a la esperada en base a las frecuencias de entraada, y lo mismo ocurre con la primer etapa (tabla \ref{tab:av_e1}). 
+
+En el caso de la segunda etapa (tabla \ref{tab:av_e2}) la respuesta en frecuencia presenta una forma similar si bien de mucha menor ganancia, esto posiblemente se debe al efecto de su baja impedancia de entrada. Todos los circuitos fueron probados con una entrada de 5 mV, pero la segunda etapa, a diferencia de la primera o el amplificador completo, tiene una impedancia igual a la del generador de señales ($50 \omega$), por lo que cae en ella la mitad de la tensión de entrada. Por esto los valores de ganancia medidos son aproximadamente la mitad de los esperados en el diseño.
 
 \begin{table}[H]
 \centering
@@ -92,13 +104,16 @@ Zoutt & 1433,30 & 1492,00 & 1070,00 & 0,39 \\ \hline
 \label{tab:av_e2}
 \end{table}
 
+Se presenta a continuación los resultados de un barrido en tensión del amplificador completo (tabla \ref{tab:vo_pp_av_t}). Como se dijo, no se presentan los resultados de las etapas aisladas ya que carecen de relevancia, el objetivo de estas mediciones es encontrar la distorción del amplificador para uana cierta tensión de entrada, cosa que las etapas aisladas no evidenciaban para los valores utilizados.
+
+Nuevamente se ve como, debido a la diferencia entre el modelo de diseño y el real, según el diseño el amplificador no tendría una caida de la ganancia por una tensión de entrada excesiva, sin embargo, tanto la simulación como la medición evidencian lo contrario, además con valores muy similares.
 
 \begin{table}[H]
 \centering
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
 \hline
-\multirow{2}{*}{\textbf{Entrada}} & \multicolumn{4}{c|}{\textbf{$V_{o\text{pp}}$ T [mV]}} & \multicolumn{4}{c|}{\textbf{$A_v$ T}} \\ \cline{2-9}
+\multirow{2}{*}{\textbf{Entrada [mV]}} & \multicolumn{4}{c|}{\textbf{$V_{o\text{pp}}$ T [mV]}} & \multicolumn{4}{c|}{\textbf{$A_v$ T}} \\ \cline{2-9}
  & \textbf{Diseño} & \textbf{Simulación} & \textbf{Medición} & \textbf{$\Delta$\%} & \textbf{Diseño} & \textbf{Simulación} & \textbf{Medición} & \textbf{$\Delta$\%} \\ \hline
 5 & 123,44 & 103,00 & 102,00 & 0,01 & 24,69 & 10,30 & 10,20 & 0,01 \\ \hline
 10 & 246,88 & 206,30 & 202,00 & 0,02 & 24,69 & 10,31 & 10,10 & 0,02 \\ \hline
@@ -113,6 +128,7 @@ Zoutt & 1433,30 & 1492,00 & 1070,00 & 0,39 \\ \hline
 \label{tab:vo_pp_av_t}
 \end{table}
 
+Así como el parametro K de los transistores reales hizo que se diferenciaran los valores obtenidos en las tablas anteriores respecto de lo esperado, ahora son las capacidades parásitas reales ($C_{gd}$ y $C_{gs}$) las que alteran los resultados. Se puede ver en todas las tablas de ancho de banda (tablas \ref{tab:av_total}, \ref{tab:av_e1} y \ref{tab:av_e2}) que la frecuencia de corte en alta, tanto con el $C_{hf}$ como sin el, son menores, lo que evidencia que las capacidades parásitas de los transistores son en realidad mayores a los valores provistos por el fabricante, también pudiendo ser que hayan otras capacidades parásitas en la PCB que aporten también, reduciendo el ancho ed banda.
 
 \begin{table}[H]
 \centering
@@ -126,7 +142,7 @@ Zoutt & 1433,30 & 1492,00 & 1070,00 & 0,39 \\ \hline
  & fh & 19767,00 & 19000,00 & 17000,00 & 0,12 \\ \cline{2-6} 
  & BW & 19703,34 & 18939,00 & 16870,00 & 0,12 \\ \hline
 \end{tabular}
-\caption{Ancho de Banda Total ($f_L$, $f_H$ y $BW$) con y sin $C_{hf}$}
+\caption{Ancho de Banda Total con y sin $C_{hf}$}
 \label{tab:ancho_de_banda}
 \end{table}
 
@@ -140,7 +156,7 @@ fl & 63,66 & 72,00 & 70,00 & 0,03 \\ \hline
 fh & Inf & 3300000,00 & 100000,00 & 32,00 \\ \hline
 BW & Inf & 3300000,00 & 100000,00 & 32,00 \\ \hline
 \end{tabular}
-\caption{Ancho de Banda de la Etapa 1 ($f_L$, $f_H$ y $BW$)}
+\caption{Ancho de Banda de la Etapa 1}
 \label{tab:ancho_de_banda_e1}
 \end{table}
 
@@ -157,10 +173,11 @@ BW & Inf & 3300000,00 & 100000,00 & 32,00 \\ \hline
  & fh & 19082,68 & 22500,00 & 13000,00 & 0,73 \\ \cline{2-6} 
  & BW & 19069,63 & 21200,00 & 13000,00 & 0,63 \\ \hline
 \end{tabular}
-\caption{Ancho de Banda de la Etapa 2 ($f_L$, $f_H$ y $BW$) con y sin $C_{hf}$}
+\caption{Ancho de Banda de la Etapa 2 con y sin $C_{hf}$}
 \label{tab:ancho_de_banda_e2}
 \end{table}
 
+El THD (tablas \ref{tab:thd_t}, \ref{tab:thd_e1} y \ref{tab:thd_e2}) presenta valores peuqeños, en muchos casos menores a los simulados, lo que muestra que el amplificador tiene una amplificación que casi no presenta distorsiones armónicas.
 
 \begin{table}[H]
 \centering
@@ -172,7 +189,7 @@ BW & Inf & 3300000,00 & 100000,00 & 32,00 \\ \hline
 20000 & 0,00 & 47,24 & 16,77 & 1,82 \\ \hline
 100000 & 0,00 & 79,30 & 40,80 & 0,94 \\ \hline
 \end{tabular}
-\caption{Distorsión Armónica Total ($\text{THD T }[\%]$)}
+\caption{Distorsión Armónica Total \%}
 \label{tab:thd_t}
 \end{table}
 
@@ -187,7 +204,7 @@ BW & Inf & 3300000,00 & 100000,00 & 32,00 \\ \hline
 20000 & 0,00 & 23,22 & 10,60 & 1,19 \\ \hline
 100000 & 0,00 & 79,80 & 22,80 & 2,50 \\ \hline
 \end{tabular}
-\caption{Distorsión Armónica de la Etapa 1 ($\text{THD E1}$)}
+\caption{Distorsión Armónica de la Etapa 1 \%}
 \label{tab:thd_e1}
 \end{table}
 
@@ -202,6 +219,6 @@ BW & Inf & 3300000,00 & 100000,00 & 32,00 \\ \hline
 20000 & 0,00 & 23,17 & 5,30 & 3,37 \\ \hline
 100000 & 0,00 & 80,00 & 20,30 & 2,94 \\ \hline
 \end{tabular}
-\caption{Distorsión Armónica de la Etapa 2 ($\text{THD E2}$)}
+\caption{Distorsión Armónica de la Etapa 2 \%}
 \label{tab:thd_e2}
 \end{table}
