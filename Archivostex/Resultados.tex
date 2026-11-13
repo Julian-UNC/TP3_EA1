@@ -32,19 +32,19 @@ Mref & 2N7000 & 285,68 & 72,94 & 16,40 & 3,45 \\ \hline
 \label{tab:potencia_mW}
 \end{table}
 
-Para el caso de las impedancias, tabla \ref{tab:impedancias}, se ve que no hay variación significativa entre los resultados. La mayores difenrencia se presentan en los valores de impedancia de entrada, para el caso  de $Z_{in1}$ y $Z_{int}$ su discrepancia se debe a que se diseñó y simulo con $2 M\omega$ pero el valor comercial dispinible es de $2 M\omega$, y en el caso de la $Z_{in2}$ su variación entre diseño y medición es debida al ajuste de las resistencias comentado.
+Para el caso de las impedancias, tabla \ref{tab:impedancias}, se vio en la simulación una gran variación de esta con respecto de la frecuencia, por lo que se simularon y midieron en 10 kHz, un valor donde el amplificador presentaba una respuesta estable. Si bien las variaciones entre lo simulado y medido no son significativas, es probable que influyan en estas diferencias las características de los transistores utilizados.
 
 \begin{table}[H]
 \centering
 \begin{tabular}{|c|c|c|c|c|}
 \hline
 \textbf{Impedancia} & \textbf{Diseño} & \textbf{Simulación} & \textbf{Medición} & \textbf{$\Delta$\%} \\ \hline
-Zin1 & 667000,00 & 669000,00 & 89100,00 & 6,51 \\ \hline
-Zin2 & 283,17 & 50,00 & 52,70 & -0,05 \\ \hline
-Zint & 667000,00 & 630000,00 & 89100,00 & 6,07 \\ \hline
-Zout1 & 2182,50 & 2200,00 & 1539,00 & 0,43 \\ \hline
-Zout2 & 1433,30 & 1480,00 & 1070,00 & 0,38 \\ \hline
-Zoutt & 1433,30 & 1492,00 & 1070,00 & 0,39 \\ \hline
+Zin1 & 667000,00 & 140000 & 89100,00 & 0,57 \\ \hline
+Zin2 & 283,17    & 50,00  & 52,70    & -0,05 \\ \hline
+Zint & 667000,00 & 140000 & 89100,00 & 0,57 \\ \hline
+Zout1 & 2182,50  & 2200   & 1539,00  & 0,43 \\ \hline
+Zout2 & 1433,30  & 1000   & 1070,00  & -0,07 \\ \hline
+Zoutt & 1433,30  & 1000   & 1070,00  & -0,07 \\ \hline
 \end{tabular}
 \caption{Impedancias }
 \label{tab:impedancias}

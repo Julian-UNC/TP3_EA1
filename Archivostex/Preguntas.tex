@@ -1,0 +1,76 @@
+\section{Preguntas de Análisis}
+
+\begin{enumerate}
+
+\item \textbf{Si la corriente medida de $I_1$ difiere significativamente del valor de diseño, ¿A qué se atribuye la diferencia? Fundamentar con lo visto sobre dispersión de $V_{TH}$.} \\
+Se atribuye a la dispersión natural de la tensión de umbral y a la variación del parámetro de transconductancia entre los transistores reales y el modelo teórico. Estas variaciones alteran las condiciones de polarización, por lo que fue necesario implementar resistencias variables en el circuito construido para lograr ajustar las corrientes al punto de operación deseado.
+
+\item \textbf{¿Qué función cumple específicamente $R_{S1}$ (más allá de fijar la corriente)? ¿Qué pasaría si $R_{S1} = 0$?} \\
+La resistencia de surtidor estabiliza el punto de polarización en corriente continua mediante la aplicación de realimentación negativa local. Si se anulara esta resistencia, el amplificador perdería dicha estabilidad frente a variaciones térmicas o de parámetros de fabricación, volviéndose altamente dependiente de la dispersión del componente, aunque su ganancia de tensión en lazo abierto aumentaría.
+
+\item \textbf{¿Por qué la ganancia de esta etapa MOSFET es notablemente menor que la de un amplificador BJT equivalente con las mismas corrientes de polarización?} \\
+Esto ocurre porque la transconductancia de un transistor MOSFET crece proporcionalmente a la raíz cuadrada de su corriente de drenador, mientras que en un BJT el incremento es directamente proporcional a la corriente de colector, lo que resulta en un valor de transconductancia y una ganancia intrínseca notablemente inferiores para el MOSFET bajo la misma corriente estática.
+
+\item \textbf{¿Qué cambio de diseño propondría para aumentar la ganancia total, sin cambiar las corrientes de polarización?} \\
+Se propone implementar un capacitor de derivación en paralelo con la resistencia de surtidor, lo cual elimina la realimentación negativa exclusivamente para las señales de corriente alterna, maximizando así la ganancia dinámica sin perturbar el punto de trabajo estático establecido.
+
+\item \textbf{Si tuvieras que construir este mismo espejo de corriente con total confiabilidad de matching, ¿qué alternativa de componente se debería seleccionar, y por qué?} \\
+Se debería seleccionar un circuito integrado que contenga un arreglo de transistores apareados, dado que al ser fabricados sobre el mismo sustrato de silicio comparten propiedades paramétricas casi idénticas y un acoplamiento térmico perfecto, eliminando las severas dispersiones observadas al utilizar componentes discretos.
+
+\item \textbf{Comparar (cualitativamente) la impedancia de entrada de esta etapa surtidor común contra la de un emisor común equivalente con BJT.} \\
+La impedancia de entrada de la etapa MOSFET es virtualmente infinita debido al aislamiento de la compuerta, quedando definida en la práctica solo por las altas resistencias de polarización (del orden de los megaohmios). En contraste, un emisor común BJT presenta una impedancia de entrada significativamente menor al depender de su corriente de base finita y su parámetro de ganancia de corriente.
+
+\item \textbf{Proponer tres formas de aumentar la ganancia, evaluar su practicidad de implementación, su penalización en tensión de excursión y disipación de potencia.} \\
+Se puede colocar un capacitor en paralelo con la resistencia de surtidor, siendo una solución muy práctica que no penaliza ni la excursión de señal ni la potencia disipada. Otra opción es incrementar el valor de la resistencia de drenaje, lo cual es sencillo pero penaliza reduciendo el margen de excursión simétrica de salida. Finalmente, se podría sustituir la resistencia de drenaje por una carga activa, lo que resulta más complejo de implementar pero eleva considerablemente la ganancia sin un deterioro severo de la excursión.
+
+\item \textbf{¿Por qué aumentar $R_{D1}$ tiene un efecto casi nulo sobre la ganancia total, mientras que aumentar $R_{D2}$ sí la mejora notablemente? Relacionar con qué resistencia realmente carga a cada etapa.} \\
+Aumentar la resistencia de drenaje de la primera etapa resulta inefectivo porque dicho nodo se encuentra fuertemente cargado en alterna por la impedancia de entrada de la segunda etapa, la cual decae en alta frecuencia por el efecto Miller. Por el contrario, la segunda etapa no sufre esta carga capacitiva subsecuente, permitiendo que un incremento en su propia resistencia de drenaje impacte directa y favorablemente en la ganancia total de tensión.
+
+\item \textbf{La $Z_{in}$ medida, ¿coincide con la teórica? Si el generador de función tiene $50~\Omega$ de impedancia de salida, ¿por qué esa diferencia es despreciable frente a $Z_{in}$?} \\
+La medición de $Z_{in}$ ($89.1\text{ k}\Omega$) no coincide con el cálculo teórico de diseño ($667\text{ k}\Omega$), presentando una fuerte caída debido a las capacitancias parásitas y el efecto Miller a alta frecuencia, pero la impedancia de salida de $50\ \Omega$ del generador sigue siendo completamente despreciable porque, al formar un divisor resistivo contra los $89.1\text{ k}\Omega$ de entrada reales, la pérdida de señal es minúscula ($0.05\%$), garantizando que prácticamente la totalidad de la tensión del generador se transfiera al amplificador. 
+
+\item \textbf{De los cinco capacitores de acople, ¿cuál determina la frecuencia de corte inferior del amplificador completo? ¿Por qué los demás, aunque tienen su propia frecuencia asociada, no la limitan?} \\
+La limitación en baja frecuencia está determinada exclusivamente por el capacitor de derivación de surtidor de la primera etapa ($C_{s1}$), ya que fue diseñado intencionalmente para generar el polo dominante de mayor valor. Los demás capacitores poseen polos ubicados en frecuencias mucho menores, comportándose como cortocircuitos plenos antes de que su efecto de atenuación sea relevante en la banda de paso.
+
+\item \textbf{Si se desea reducir $f_L$ a la mitad, ¿qué capacitor es conviente aumentar? ¿Por qué no tiene sentido aumentar los otros cuatro?} \\
+Se debe aumentar al doble el valor del capacitor de surtidor de la primera etapa ($C_{s1}$) para desplazar el polo dominante a la mitad de su frecuencia actual. No tendría sentido modificar los otros capacitores debido a que sus polos ya se encuentran situados a frecuencias considerablemente menores, por lo que no ejercen influencia alguna sobre el punto de corte inferior general.
+
+\item \textbf{¿Qué relación hay entre $f_H$ y la ganancia de la primera etapa (efecto Miller)? Si redujeras $|A_{v1}|$, ¿qué pasaría con $f_H$?} \\
+El efecto Miller multiplica la capacidad parásita de retroalimentación en función de la ganancia de la etapa, incrementando la capacidad equivalente a la entrada y reduciendo así el ancho de banda. Si se redujera la magnitud de la ganancia, la capacidad reflejada sería correspondientemente menor, lo que provocaría un aumento en el ancho de banda al desplazar la frecuencia de corte superior hacia valores más elevados.
+
+\item \textbf{¿Por qué $C_{HF}$ debe estar en paralelo con $R_{D2}$ y no, por ejemplo, en paralelo con $R_{D1}$? Analizar qué impedancia ve cada nodo.} \\
+Se ubica a la salida porque el nodo de drenaje de la segunda etapa exhibe una resistencia de Thevenin equivalente mucho mayor, permitiendo establecer el polo de 20 kHz deseado con un capacitor más pequeño. Si se situara en la primera etapa, el valor capacitivo requerido interferiría negativamente con el funcionamiento interno del amplificador y requeriría componentes de mayor tamaño físico.
+
+\item \textbf{Si la señal de entrada viniera de un sensor de alta impedancia (no de un generador de laboratorio), ¿seguiría teniendo sentido agregar $C_{HF}$ para limitar a 20 kHz? Fundamentar a partir de la estimación de la frecuencia de corte superior realizada.} \\
+Perdería sentido agregar un capacitor discreto a la salida, ya que la elevada impedancia interna del sensor formaría de inmediato un filtro paso bajo al interactuar directamente con la capacidad equivalente de entrada amplificada por el efecto Miller, lo cual limitaría el ancho de banda del sistema de manera intrínseca y posiblemente muy por debajo de los 20 kHz previstos.
+
+\item \textbf{A partir de qué amplitud de entrada la distorsión se hizo visible en el osciloscopio, ¿coincide con lo esperable dado el $THD_2$ teórico? Considerar que el umbral de distorsión perceptible a simple vista suele rondar el 3--5 \%.} \\
+La distorsión asimétrica se tornó visualmente evidente a medida que la tensión de salida requería una amplitud de excursión que forzaba a los transistores fuera de su región de pequeña señal ideal, notándose una compresión en las crestas (evidenciada en la caída progresiva de la ganancia medida respecto a la calculada a partir de los 20 mV de entrada). Esto coincide completamente con el aumento teórico de la distorsión armónica al dejar de cumplirse la aproximación lineal.
+
+\item \textbf{La distorsión de un MOSFET en surtidor común es predominantemente de 2do armónico (a diferencia de otras no linealidades). ¿Por qué? (Ayuda: desarrollar $(V_{ov} +v_{gs})^2$ y observar qué término genera la componente en $2\omega$).} \\
+Se debe a la naturaleza puramente cuadrática de la ecuación de corriente de drenaje en la región de saturación. Asumiendo que la señal de entrada en alterna es un tono puro $v_{gs} = V_p \cos(\omega t)$, partimos del término al cuadrado de la corriente:
+
+\begin{equation*}
+(V_{ov} + v_{gs})^2 = (V_{ov} + V_p \cos(\omega t))^2
+\end{equation*}
+
+Desarrollando el binomio al cuadrado obtenemos:
+\begin{equation*}
+(V_{ov} + v_{gs})^2 = V_{ov}^2 + 2 V_{ov} V_p \cos(\omega t) + V_p^2 \cos^2(\omega t)
+\end{equation*}
+
+Para linealizar el término al cuadrado, aplicamos la identidad trigonométrica $\cos^2(\theta) = \frac{1 + \cos(2\theta)}{2}$:
+\begin{equation*}
+(V_{ov} + v_{gs})^2 = V_{ov}^2 + 2 V_{ov} V_p \cos(\omega t) + \frac{V_p^2}{2} \left( 1 + \cos(2\omega t) \right)
+\end{equation*}
+
+Reagrupando los términos según su frecuencia, la expresión final queda:
+\begin{equation*}
+(V_{ov} + v_{gs})^2 = \underbrace{\left( V_{ov}^2 + \frac{V_p^2}{2} \right)}_{\text{Componente DC}} + \underbrace{2 V_{ov} V_p \cos(\omega t)}_{\text{Fundamental } (\omega)} + \underbrace{\frac{V_p^2}{2} \cos(2\omega t)}_{\text{2do Armónico } (2\omega)}
+\end{equation*}
+
+Como se observa explícitamente en el desarrollo matemático, la no linealidad cuadrática inyecta de forma inherente una componente que oscila al doble de la frecuencia original, lo que genera una distorsión dominante de segundo armónico en la señal de salida.
+
+\end{enumerate}
+
+
